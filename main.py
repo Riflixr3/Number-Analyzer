@@ -4,20 +4,24 @@ def median(nums: list):
     mid = n // 2
 
     if n % 2 == 0:
-        return (sorted_nums[mid - 1] + sorted_nums[mid]) / 2 
+        return (sorted_nums[mid - 1] + sorted_nums[mid]) / 2
     else:
         return sorted_nums[mid]
 
 
-def statistics(nums: list):    
+def statistics(nums: list):
 
-    sum_of_nums = sum(nums)
+    sum_of_nums = 0
+
+    for num in nums:
+        sum_of_nums += num
+
     count = len(nums)
 
     print("Input: ", sorted(nums))
 
     average = sum_of_nums / count
-    print("Average: ", average)
+    print("Average: ", round(average, 2))
 
     max_num = max(nums)
     print("Max: ", max_num)
@@ -25,8 +29,18 @@ def statistics(nums: list):
     min_num = min(nums)
     print("Min: ", min_num)
 
-    dupelicate = [i for i in set(nums) if nums.count(i) > 1]
-    print("Dupelicate: ", dupelicate)
+    num_count = {}
+
+    for num in nums:
+        num_count[num] = num_count.get(num, 0) + 1
+
+    duplicates = []
+
+    for num, count in num_count.items():
+        if count > 1:
+            duplicates.append(num)
+
+    print("Dupelicate: ", duplicates)
 
     print("Median: ", median(nums))
 
